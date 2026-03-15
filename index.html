@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LetterCraft — AI Cover Letter Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="brand">
+      <div class="brand-mark">LC</div>
+      <div>
+        <div class="brand-name">LetterCraft</div>
+        <div class="brand-sub">AI Cover Letter Generator</div>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <div class="section-label">YOUR INFO</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Muhammad Musa Bilal"/>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="musa@email.com"/>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" id="phone" placeholder="+1 (312) 000-0000"/>
+        </div>
+        <div class="field">
+          <label>LinkedIn / Portfolio</label>
+          <input type="text" id="linkedin" placeholder="linkedin.com/in/musa"/>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">JOB DETAILS</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Job Title</label>
+          <input type="text" id="jobtitle" placeholder="Software Engineer Intern"/>
+        </div>
+        <div class="field">
+          <label>Company Name</label>
+          <input type="text" id="company" placeholder="Google"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Hiring Manager Name <span class="optional">(optional)</span></label>
+        <input type="text" id="manager" placeholder="Sarah Johnson"/>
+      </div>
+
+      <div class="field">
+        <label>Job Description</label>
+        <textarea id="jobdesc" rows="5" placeholder="Paste the full job description here..."></textarea>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">YOUR BACKGROUND</div>
+
+      <div class="field">
+        <label>Your Experience & Skills</label>
+        <textarea id="experience" rows="4" placeholder="e.g. CS sophomore at UIC, 3.8 GPA. Built FlyerForge (HTML/CSS/JS), completed binary bomb lab in CS 261. Skills: Python, JavaScript, React, C..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Key Achievements <span class="optional">(optional but powerful)</span></label>
+        <textarea id="achievements" rows="3" placeholder="e.g. Dean's List, first place in CS 111 among 300 students, GANAS Tech Innovation Intern..."></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Tone</label>
+          <select id="tone">
+            <option value="professional">Professional & Confident</option>
+            <option value="enthusiastic">Enthusiastic & Energetic</option>
+            <option value="concise">Sharp & Concise</option>
+            <option value="storytelling">Storytelling & Personal</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Length</label>
+          <select id="length">
+            <option value="standard">Standard (3 paragraphs)</option>
+            <option value="detailed">Detailed (4 paragraphs)</option>
+            <option value="brief">Brief (2 paragraphs)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generate-btn" onclick="generate()">
+        <span id="btn-text">Generate Cover Letter</span>
+        <span id="btn-loader" class="hidden">Crafting your letter...</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="preview-header">
+      <div class="preview-title">Preview</div>
+      <div class="preview-actions" id="preview-actions" style="display:none">
+        <button class="action-btn" onclick="copyText()">Copy Text</button>
+        <button class="action-btn primary" onclick="downloadPDF()">Download PDF</button>
+      </div>
+    </div>
+
+    <div class="preview-area" id="preview-area">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">✦</div>
+        <div class="empty-title">Your cover letter will appear here</div>
+        <div class="empty-sub">Fill in your details on the left and click Generate</div>
+        <div class="tips">
+          <div class="tip-title">Tips from Google, Microsoft & top recruiters:</div>
+          <div class="tip">Address the hiring manager by name when possible</div>
+          <div class="tip">Link your experience directly to the job description</div>
+          <div class="tip">Include specific achievements with metrics</div>
+          <div class="tip">Show passion for the company, not just the role</div>
+          <div class="tip">Keep it to one page — every word must earn its place</div>
+        </div>
+      </div>
+
+      <!-- PDF CONTENT -->
+      <div id="letter-output" class="letter-output hidden">
+        <div id="pdf-content">
+          <div class="letter-header">
+            <div class="letter-name" id="out-name"></div>
+            <div class="letter-contact" id="out-contact"></div>
+          </div>
+          <div class="letter-date" id="out-date"></div>
+          <div class="letter-to" id="out-to"></div>
+          <div class="letter-body" id="out-body"></div>
+          <div class="letter-sign">
+            <div>Sincerely,</div>
+            <div class="letter-sign-name" id="out-signname"></div>
+          </div>
+        </div>
+        <div class="score-bar" id="score-bar"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
