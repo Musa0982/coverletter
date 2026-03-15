@@ -1,4 +1,4 @@
-const GROQ_KEY = "YOUR_GROQ_API_KEY"; // get free key at console.groq.com
+const GROQ_KEY = "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"; // get free key at console.groq.com
 
 async function generate() {
   const name = document.getElementById("name").value.trim();
