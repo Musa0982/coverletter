@@ -5,7 +5,7 @@ LetterCraft is an AI-powered cover letter generator that helps job seekers creat
 ## 🚀 Live Demo
 [cvrltr.netlify.app](https://cvrltr.netlify.app)
 
-> 📹 **Demo Video:** [Click here to watch a walkthrough](#) ← replace with your screen recording link
+> 📹 **Demo Video:**
 
 ---
 
@@ -30,7 +30,7 @@ LetterCraft is an AI-powered cover letter generator that helps job seekers creat
 
 ## 📸 Screenshots
 
-![LetterCraft Screenshot](your-screenshot-url-here)
+![LetterCraft Screenshot]
 
 ---
 
