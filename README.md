@@ -30,7 +30,7 @@ LetterCraft is an AI-powered cover letter generator that helps job seekers creat
 
 ## 📸 Screenshots
 
-![LetterCraft Screenshot]
+<img width="1470" height="834" alt="image" src="https://github.com/user-attachments/assets/bd81f0bf-2726-4826-849c-50dbe3ced79b" />
 
 ---
 
