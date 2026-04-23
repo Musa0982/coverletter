@@ -41,7 +41,7 @@ git clone https://github.com/Musa0982/coverletter.git
 cd coverletter
 ```
 
-Then open `index.html` in your browser. Add your Groq API key where prompted in the config.
+Then open `index.html` in your browser. 
 
 ---
 
