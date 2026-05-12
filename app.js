@@ -1,5 +1,3 @@
-const OPENROUTER_KEY = "your_openrouter_key_here";
-
 async function generate() {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -81,28 +79,21 @@ INSTRUCTIONS:
 - Return ONLY the letter body — no extra commentary, no subject line, just the letter from greeting to sign-off word (do not include "Sincerely" or the name at the end, I'll add those)`;
 
   try {
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    const res = await fetch("/.netlify/functions/generate", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENROUTER_KEY}`
-      },
-      body: JSON.stringify({
-        model: "meta-llama/llama-3.3-70b-instruct:free",
-        max_tokens: 1200,
-        messages: [{ role: "user", content: prompt }]
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
     });
 
     const data = await res.json();
-    const letter = data.choices?.[0]?.message?.content;
+    const letter = data.letter;
 
     if (!letter) throw new Error("No response");
 
     renderLetter({ name, email, phone, linkedin, jobtitle, company, manager, letter });
 
   } catch (err) {
-    alert("Error generating letter. Check your API key.");
+    alert("Error generating letter. Please try again.");
     console.error(err);
   } finally {
     btn.disabled = false;
