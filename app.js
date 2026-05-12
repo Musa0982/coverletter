@@ -1,4 +1,4 @@
-const GROQ_KEY = "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"; // get free key at console.groq.com
+const OPENROUTER_KEY = "your_openrouter_key_here";
 
 async function generate() {
   const name = document.getElementById("name").value.trim();
@@ -81,14 +81,14 @@ INSTRUCTIONS:
 - Return ONLY the letter body — no extra commentary, no subject line, just the letter from greeting to sign-off word (do not include "Sincerely" or the name at the end, I'll add those)`;
 
   try {
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${GROQ_KEY}`
+        "Authorization": `Bearer ${OPENROUTER_KEY}`
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "meta-llama/llama-3.3-70b-instruct:free",
         max_tokens: 1200,
         messages: [{ role: "user", content: prompt }]
       })
@@ -102,7 +102,7 @@ INSTRUCTIONS:
     renderLetter({ name, email, phone, linkedin, jobtitle, company, manager, letter });
 
   } catch (err) {
-    alert("Error generating letter. Check your Groq API key in app.js.");
+    alert("Error generating letter. Check your API key.");
     console.error(err);
   } finally {
     btn.disabled = false;
@@ -113,33 +113,23 @@ INSTRUCTIONS:
 }
 
 function renderLetter({ name, email, phone, linkedin, jobtitle, company, manager, letter }) {
-  // Contact line
   const contactParts = [email, phone, linkedin].filter(Boolean);
   document.getElementById("out-name").textContent = name;
   document.getElementById("out-contact").textContent = contactParts.join(" · ");
 
-  // Date
   const now = new Date();
   document.getElementById("out-date").textContent = now.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
-  // To
-  const toLines = manager
-    ? `${manager}\n${company}`
-    : company;
+  const toLines = manager ? `${manager}\n${company}` : company;
   document.getElementById("out-to").textContent = toLines;
 
-  // Body
   document.getElementById("out-body").textContent = letter;
-
-  // Sign
   document.getElementById("out-signname").textContent = name;
 
-  // Show output
   document.getElementById("empty-state").classList.add("hidden");
   document.getElementById("letter-output").classList.remove("hidden");
   document.getElementById("preview-actions").style.display = "flex";
 
-  // Score bar
   renderScore(letter, document.getElementById("jobdesc").value);
 }
 
